@@ -3,7 +3,7 @@ import {
     ADD_TECH,
     DELETE_TECH,
     SET_LOADING,
-    TECH_ERRORS,
+    TECHS_ERROR,
 } from '../actions/types';
 
 const initialState = {
@@ -26,12 +26,18 @@ export default (state = initialState, action) => {
                 techs: [...state.techs, action.payload],
                 loading: false,
             };
+        case DELETE_TECH:
+            return {
+                ...state,
+                techs: state.techs.filter((tech) => tech.id !== action.payload),
+                loading: false,
+            };
         case SET_LOADING:
             return {
                 ...state,
                 loading: true,
             };
-        case TECH_ERRORS:
+        case TECHS_ERROR:
             console.error(action.payload);
             return {
                 ...state,
