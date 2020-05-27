@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import TechSelectOptions from '../techs/TechSelectOptions';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { addLog } from '../../actions/logActions';
@@ -13,16 +14,16 @@ const AddLogModal = ({ addLog }) => {
         if (message === '' || tech === '') {
             M.toast({ html: 'Please enter a message and tech' });
         } else {
-            const newLog ={
+            const newLog = {
                 message,
                 attention,
                 tech,
-                date: new Date()
-            }
+                date: new Date(),
+            };
 
             addLog(newLog);
 
-            M.toast({ html: `Log added by ${tech}`});
+            M.toast({ html: `Log added by ${tech}` });
 
             //  Clear fields
             setMessage('');
@@ -59,13 +60,7 @@ const AddLogModal = ({ addLog }) => {
                             <option value='' disabled>
                                 Select Technician
                             </option>
-                            <option value='Adam Apple'>Adam Apple</option>
-                            <option value='Betty Blueberry'>
-                                Betty Blueberry
-                            </option>
-                            <option value='Curtis Cuccumber'>
-                                Curtis Cuccumber
-                            </option>
+                            <TechSelectOptions />
                         </select>
                     </div>
                 </div>
@@ -101,11 +96,11 @@ const AddLogModal = ({ addLog }) => {
 
 AddLogModal.propTypes = {
     addLog: PropTypes.func.isRequired,
-}
+};
 
 const modalStyle = {
     width: '75%',
     height: '75%',
 };
 
-export default connect(null, { addLog }) (AddLogModal);
+export default connect(null, { addLog })(AddLogModal);
